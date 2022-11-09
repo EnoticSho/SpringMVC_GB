@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<table>
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> Cost </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${allProducts.isEmpty()}">
+        <td colspan="2"> No Products Available </td>
+    </tr>
+
+    <tr th:each="product : ${allProducts}">
+        <td><a th:href="@{http://localhost:8080/SpringMVC_GB/products/{id}(id = ${product.getId()})}"><span th:text="${product.getName()}"> Name </span></a></td>
+        <td><span th:text="${product.getCost()}"> Cost </span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+    <form action="#" th:action="@{http://localhost:8080/SpringMVC_GB/products}" th:object="${product}" method="post">
+    <p>Id: <input type="number" th:field="*{id}" /></p>
+    <p>Name: <input type="text" th:field="*{name}" /></p>
+    <p>Cost: <input type="number" th:field="*{cost}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+
+</body>
+</html>
