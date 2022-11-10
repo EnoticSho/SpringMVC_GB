@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProductsController {
@@ -19,14 +19,15 @@ public class ProductsController {
     @GetMapping("/products")
     public String index(Model model) {
         model.addAttribute("allProducts", repository.getProducts());
-        model.addAttribute("product", new Product());
+        model.addAttribute("productInfo", new Product());
         return "startPage";
     }
 
 
     @PostMapping("/products")
-    public String addNewProduct(@RequestParam int id, @RequestParam String name, @RequestParam int cost) {
-        repository.addProduct(new Product(id, name, cost));
+    public String addNewProduct(@ModelAttribute("productInfo") Product product) {
+        repository.addProduct(product);
         return "redirect:/products";
     }
+
 }

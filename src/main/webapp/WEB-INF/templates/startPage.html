@@ -1,31 +1,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<body>
-<table>
-    <thead>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thymeleaf Form handling Demo</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+</head>
+<body class="container">
+
+<form method="post" th:action="@{/products}" th:object="${productInfo} ">
+    <div class="form-group">
+        <label for="id">ID</label>
+        <input id="id" placeholder="Enter ID" required type="number" th:field="*{id}"
+               class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" placeholder="Enter Name" required type="text" th:field="*{name}"
+               class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="cost">Enter Cost</label>
+        <input id="cost" placeholder="Enter Cost" required type="number" th:field="*{cost}"
+               class="form-control"/>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Create Product">
+</form>
+
+<table class="table table-striped table-bordered">
     <tr>
+        <th> ID   </th>
         <th> Name </th>
         <th> Cost </th>
     </tr>
-    </thead>
-    <tbody>
+
     <tr th:if="${allProducts.isEmpty()}">
         <td colspan="2"> No Products Available </td>
     </tr>
 
     <tr th:each="product : ${allProducts}">
-        <td><a th:href="@{http://localhost:8080/SpringMVC_GB/products/{id}(id = ${product.getId()})}"><span th:text="${product.getName()}"> Name </span></a></td>
-        <td><span th:text="${product.getCost()}"> Cost </span></td>
+        <td th:text="${product.getId()}"></td>
+        <td th:text="${product.getName()}"></td>
+        <td th:text="${product.getCost()}"></td>
     </tr>
-    </tbody>
 </table>
-
-
-    <form action="#" th:action="@{http://localhost:8080/SpringMVC_GB/products}" th:object="${product}" method="post">
-    <p>Id: <input type="number" th:field="*{id}" /></p>
-    <p>Name: <input type="text" th:field="*{name}" /></p>
-    <p>Cost: <input type="number" th:field="*{cost}" /></p>
-    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
-    </form>
-
 </body>
 </html>
