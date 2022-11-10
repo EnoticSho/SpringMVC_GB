@@ -1,2 +1,3 @@
 # SpringMVC_GB
-![изображение](https://user-images.githubusercontent.com/34002180/201088967-41ac09d3-8e85-4573-a7d4-3670a5f783ad.png)
+![изображение](https://user-images.githubusercontent.com/34002180/201089075-65400f55-fc3e-472f-8291-08907433513c.png)
+
